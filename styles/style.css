@@ -1,0 +1,472 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden; 
+    scroll-behavior: smooth;
+    background-color: rgb(0, 0, 48);
+}
+
+.intro-page {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.intro-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark transparent overlay */
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.content h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.content h2 {
+    font-size: 2rem;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.content p {
+    font-size: 1.2rem;
+    margin: 1rem 0 2rem;
+    max-width: 600px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+    transition: background 0.3s;
+}
+
+.scroll-button:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.ukraine-flag-section {
+    position: relative;
+    height: 100vh; /* Full-screen height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+
+    /* Ukrainian flag background with transparency */
+    background: linear-gradient(
+        rgba(255, 213, 0, 0.7) 50%, /* Yellow with 70% transparency */
+        rgba(0, 91, 187, 0.7) 50% 100% /* Blue with 70% transparency */
+    );
+}
+
+.content {
+    position: relative;
+    z-index: 1; /* Ensures content appears above the background */
+    max-width: 800px;
+    padding: 2rem;
+    color: white;
+}
+
+.content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow for readability */
+}
+
+.content p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    line-height: 1.8;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for readability */
+}
+
+
+
+
+/* Add this for the next section */
+.map-page {
+    height: 100vh;
+    background: url('/images/Ukraine_map_bg.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+
+.timeline-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.timeline-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #ffd700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.center-text {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1d1d3a;
+}
+
+.months {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.months div {
+    position: absolute;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1d1d3a;
+    text-align: center;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.months div:nth-child(1) { transform: rotate(30deg) translate(120px) rotate(-30deg); }
+.months div:nth-child(2) { transform: rotate(60deg) translate(120px) rotate(-60deg); }
+.months div:nth-child(3) { transform: rotate(90deg) translate(120px) rotate(-90deg); }
+.months div:nth-child(4) { transform: rotate(120deg) translate(120px) rotate(-120deg); }
+.months div:nth-child(5) { transform: rotate(150deg) translate(120px) rotate(-150deg); }
+.months div:nth-child(6) { transform: rotate(180deg) translate(120px) rotate(-180deg); }
+.months div:nth-child(7) { transform: rotate(210deg) translate(120px) rotate(-210deg); }
+.months div:nth-child(8) { transform: rotate(240deg) translate(120px) rotate(-240deg); }
+.months div:nth-child(9) { transform: rotate(270deg) translate(120px) rotate(-270deg); }
+.months div:nth-child(10) { transform: rotate(300deg) translate(120px) rotate(-300deg); }
+.months div:nth-child(11) { transform: rotate(330deg) translate(120px) rotate(-330deg); }
+.months div:nth-child(12) { transform: rotate(0deg) translate(120px) rotate(0deg); }
+
+.months div.highlighted {
+    color: #ff0078;
+    font-size: 1.2rem;
+    transform: scale(1.5); /* Highlighted month is larger */
+}
+
+.timeline-description {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    max-width: 500px;
+    text-align: center;
+    color: #fff;
+}
+
+
+
+
+
+
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.did-you-know-section {
+    position: relative;
+    height: 100vh; /* Full-screen height */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    background: #fff; /* Default white background */
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2; /* Content stays above the background */
+    padding: 2rem;
+    max-width: 50%;
+    color: #333;
+}
+
+.content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.content p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.timeline {
+    position: absolute;
+    right: 5%; /* Place timeline on the right */
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure it's above the background */
+    color: #333;
+}
+
+.timeline-year {
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Section: Did You Know */
+.did-you-know-section {
+    position: relative;
+    height: 100vh; /* Full-screen height */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    background: #fff; /* Default white background */
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2; /* Content stays above the background */
+    padding: 2rem;
+    max-width: 50%;
+    color: #333;
+}
+
+.content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.content p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.timeline {
+    position: absolute;
+    right: 5%; /* Place timeline on the right */
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure it's above the background */
+    color: #333;
+}
+
+.timeline-year {
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Ukrainian Flag Background */
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Section: Did You Know */
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Section: Did You Know */
+.did-you-know-section {
+    position: relative;
+    height: 100vh; /* Full-screen height */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    background: #fff; /* Start with a white background */
+    z-index: 1;
+}
+
+.did-you-know-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(255, 255, 255, 1) 0%, /* White at the start */
+        rgba(255, 213, 0, 1) 50%, /* Yellow appears halfway */
+        rgba(0, 91, 187, 1) 100% /* Blue appears at the end */
+    );
+    background-size: 100% 300%; /* Extra height for smooth animation */
+    background-position: 100% 100%; /* Initially all white */
+    z-index: 0;
+    transition: background-position 0.3s ease; /* Smooth transition */
+}
+
+.did-you-know-section .content {
+    position: relative;
+    z-index: 2; /* Content stays above the background */
+    padding: 2rem;
+    max-width: 50%;
+    color: #333;
+}
+
+.did-you-know-section .content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.did-you-know-section .content p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.timeline {
+    position: absolute;
+    right: 5%; /* Place timeline on the right */
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure it's above the background */
+    color: #333;
+}
+
+.timeline-year {
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Section: Ukraine Flag */
+.ukraine-flag-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(
+        rgba(255, 213, 0, 1) 50%, 
+        rgba(0, 91, 187, 1) 50%
+    );
+    color: #fff;
+    overflow: hidden;
+}
+
+.ukraine-flag-section .content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.ukraine-flag-section .content p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
