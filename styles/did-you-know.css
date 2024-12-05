@@ -1,0 +1,177 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: rgb(235, 235, 235);
+}
+
+.scroll-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(220, 216, 216, 0.783);
+    /* background: url('/images/Ukraine_map_bg.jpg') no-repeat center center/cover; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1s ease-in-out;
+}
+
+.flag-container {
+    display: flex;
+    width: 500px;
+    height: 250px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.square {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+.main {
+    width: 73%;
+    height: 100%;
+}
+
+.detached {
+    width: 27%;
+    height: 100%;
+    position: absolute;
+    left: 365px;
+    transform: translateX(0);
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.blue-part {
+    background-color: blue;
+    width: 100%;
+    height: 50%;
+}
+
+.yellow-part {
+    background-color: yellow;
+    width: 100%;
+    height: 50%;
+}
+
+.text-container {
+    text-align: center;
+    position: absolute;
+    bottom: 10%;
+    width: 80%;
+}
+
+.initial-text {
+    font-size: 2rem;
+    margin: 0;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.dynamic-text {
+    font-size: 1.5rem;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.timeline-container {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    display: flex;
+    align-items: center;
+    height: 80%; /* Adjust height */
+    width: 5%; /* Adjust width */
+}
+
+.timeline {
+    position: relative;
+    width: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timeline-line {
+    position: absolute;
+    width: 2px;
+    background-color: #d3d3d3; /* Light gray (hidden initially) */
+    height: 0%; /* Hidden initially */
+    left: 50%; /* Center line */
+    top: 15%; /* Adjust starting position to match 2024 */
+    transition: height 1s ease, background-color 0.5s ease;
+}
+
+.year {
+    position: absolute;
+    font-size: 1.2rem;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+}
+
+.current-year {
+    top: 0; /* Align 2024 at the top */
+    color: black; /* More visible */
+    font-size: 1.5rem; /* Slightly larger font */
+    font-weight: bold; /* Bold text */
+}
+
+.next-year {
+    bottom: 0; /* Align 2014 at the bottom */
+    color: red;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(10px);
+}
+
+
+.current-year {
+    top: 0;
+    color: black;
+    font-size: 2rem; /* Larger size */
+    font-weight: bold;
+    position: relative; /* Enable pseudo-elements */
+}
+
+.current-year::before,
+.current-year::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background-color: black;
+}
+
+.current-year::before {
+    top: -20px; /* Line above the year */
+    height: 20px; /* Adjust the height */
+}
+
+.current-year::after {
+    bottom: -20px; /* Line below the year */
+    height: 20px; /* Adjust the height */
+}

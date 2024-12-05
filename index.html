@@ -4,93 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Timeline</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="/images/icons/ukraine_icon.png" type="image/png">
+
+        <!-- Section-specific styles -->
+        <link rel="stylesheet" href="styles/base.css">
+        <link rel="stylesheet" href="styles/intro-page.css">
+        <link rel="stylesheet" href="styles/did-you-know.css">
+        <link rel="stylesheet" href="styles/ukraine-flag.css">
+        <link rel="stylesheet" href="styles/timeline-section.css">
+        <link rel="stylesheet" href="styles/final-page.css">
+        <!-- Animations -->
+        <link rel="stylesheet" href="styles/animations.css">
+
 </head>
 <body>
-    <!-- First Section -->
-    <section class="intro-page">
-        <video autoplay muted loop class="background-video" id="backgroundVideo">
-            <source src="/videos/ukraine_dron.mov" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="content">
-            <h1>How Ukraine Battles for</h1>
-            <h2>Land, Life, Liberty</h2>
-            <p class="header-desc">Discover the untold stories behind the numbers.</p>
-            <p class="header-desc">Learn how a nation endures and resists.</p>
-        </div>
-        <button class="scroll-button" onclick="scrollToNext()">Scroll to Explore</button>
-    </section>
+    <div id="intro-page"></div>
+    <div id="did-you-know"></div>
+    <div id="ukraine-flag-section"></div>
+    <div id="timeline-section"></div>
+    <div id="final-page"></div>
 
-
-
-<!-- Section: Occupied Territory -->
-<section class="did-you-know-section">
-    <div class="content">
-        <h1>Did You Know?</h1>
-        <p>Currently, 25% of Ukraine is occupied by Russia.</p>
-    </div>
-    <div class="timeline">
-        <div class="timeline-year" id="timelineYear">2024</div>
-    </div>
-</section>
-
-<!-- Second Section -->
-<section class="ukraine-flag-section">
-    <div class="content">
-        <h1>Stand with Ukraine</h1>
-        <p>
-            Supporting Ukraine's sovereignty, liberty, and resilience. Together, we stand united for peace and freedom.
-        </p>
-    </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <section class="timeline-section">
-        <div class="timeline-container">
-            <div class="circle">
-                <div class="center-text" id="centerText">2016</div>
-                <div class="months">
-                    <div data-month="Jan" id="Jan">Jan</div>
-                    <div data-month="Feb" id="Feb">Feb</div>
-                    <div data-month="Mar" id="Mar">Mar</div>
-                    <div data-month="Apr" id="Apr">Apr</div>
-                    <div data-month="May" id="May">May</div>
-                    <div data-month="Jun" id="Jun">Jun</div>
-                    <div data-month="Jul" id="Jul">Jul</div>
-                    <div data-month="Aug" id="Aug">Aug</div>
-                    <div data-month="Sep" id="Sep">Sep</div>
-                    <div data-month="Oct" id="Oct">Oct</div>
-                    <div data-month="Nov" id="Nov">Nov</div>
-                    <div data-month="Dec" id="Dec">Dec</div>
-                </div>
-            </div>
-            <div class="timeline-description" id="timelineDescription">
-                Scroll to explore the months and see the data.
-            </div>
-        </div>
-    </section>
-
-
-        <!-- Final Section -->
-        <section class="final-page">
-            <h1>Thank you for exploring!</h1>
-            <p>Learn more about Ukraine's battle for freedom.</p>
-        </section>
-
-    <script src="timeline.js"></script>
-    <script src="didYouKnow.js"></script>
-
+    <script>
+        async function loadSection(sectionId, filePath, scriptPath) {
+            const response = await fetch(filePath);
+            const html = await response.text();
+            const container = document.getElementById(sectionId);
+            container.innerHTML = html;
+    
+            // Load the section-specific script only after the HTML content is added to the DOM
+            if (scriptPath) {
+                const script = document.createElement('script');
+                script.src = scriptPath;
+    
+                // Append the script only after it's ready to execute
+                script.onload = () => {
+                    console.log(`${scriptPath} loaded successfully for ${sectionId}`);
+                };
+    
+                script.onerror = () => {
+                    console.error(`Failed to load script: ${scriptPath}`);
+                };
+    
+                document.body.appendChild(script);
+            }
+    
+            // Example: Smooth scroll for intro-page button
+            if (sectionId === 'intro-page') {
+                const scrollButton = document.getElementById('scrollButton');
+                if (scrollButton) {
+                    scrollButton.addEventListener('click', function () {
+                        const nextSection = document.getElementById('did-you-know');
+                        nextSection.scrollIntoView({ behavior: 'smooth' });
+                    });
+                }
+            }
+        }
+    
+        // Load sections with corresponding scripts
+        loadSection('intro-page', 'sections/intro-page.html');
+        loadSection('did-you-know', 'sections/did-you-know.html', 'scripts/didYouKnow.js');
+    </script>
+    
+    
+    
 </body>
 </html>

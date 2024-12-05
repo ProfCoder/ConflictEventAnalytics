@@ -1,0 +1,47 @@
+.timeline-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.timeline-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #ffd700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.center-text {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1d1d3a;
+}
+
+.months div.highlighted {
+    color: #ff0078;
+    font-size: 1.2rem;
+    transform: scale(1.5);
+}
+
+.timeline-description {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    max-width: 500px;
+    text-align: center;
+    color: #fff;
+}

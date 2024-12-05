@@ -1,0 +1,30 @@
+<section class="intro-page">
+    <video autoplay muted loop class="background-video" id="backgroundVideo">
+        <source src="/videos/ukraine_dron.mov" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        <h1>How Ukraine Battles for</h1>
+        <div class="divider"></div>
+        <h2>Land, Life, Liberty</h2>
+        <p class="header-desc">Discover the untold stories behind the numbers.</p>
+        <!-- <button class="scroll-button" onclick="scrollToNext()">Scroll to Explore</button> -->
+    </div>
+    
+    <button class="scroll-button" id="scrollButton">Scroll to Explore</button>
+
+    <div class="arrow-down"></div>
+
+    
+    <script>
+        document.getElementById('scrollButton').addEventListener('click', function () {
+            // Get the next section
+            const nextSection = document.getElementById('did-you-know');
+            // Scroll to the next section smoothly
+            nextSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+    
+    
+
+</section>
