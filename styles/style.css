@@ -41,6 +41,7 @@ body {
 .content {
     position: relative;
     z-index: 1;
+
 }
 
 .content h1 {
@@ -117,6 +118,7 @@ body {
     max-width: 800px;
     padding: 2rem;
     color: white;
+
 }
 
 .content h1 {

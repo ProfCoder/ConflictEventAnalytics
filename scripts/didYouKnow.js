@@ -1,141 +1,95 @@
-document.addEventListener("DOMContentLoaded", () => {
+console.log("didYouKnow.js loaded");
+
+let progress = 0;
+let isDetachmentComplete = false;
+
+function initializeScrollLogic() {
     const detachedSquare = document.querySelector(".detached");
-    const scrollSection = document.querySelector(".scroll-section");
-    const nextPage = document.querySelector(".next-page");
     const initialText = document.querySelector(".initial-text");
     const dynamicText = document.querySelector(".dynamic-text");
-    const progressBar = document.querySelector(".timeline-line"); // Line connecting 2024 to 2014
+    const progressBar = document.querySelector(".timeline-line");
     const currentYear = document.querySelector(".current-year");
     const nextYear = document.querySelector(".next-year");
 
-    let progress = 0;
-    let isDetachmentComplete = false;
-    let isOnNextPage = false;
+    // Set initial visibility for text and elements
+    if (initialText) initialText.style.opacity = "1";
+    if (dynamicText) dynamicText.style.opacity = "0"; // Ensure dynamic text starts hidden
 
-    // Show the initial text on load
-    initialText.style.opacity = "1";
-
-    // Listen to scroll events
     window.addEventListener("wheel", (event) => {
-        const direction = event.deltaY > 0 ? "down" : "up";
+        progress += event.deltaY * 0.1;
+        progress = Math.max(0, Math.min(100, progress)); // Clamp progress between 0 and 100
 
-        if (!isOnNextPage) {
-            // Handle detachment logic when on the first page
-            if (!isDetachmentComplete) {
-                // Adjust progress based on scroll direction
-                progress += event.deltaY * 0.1; // Adjust speed with multiplier
-                progress = Math.max(0, Math.min(100, progress)); // Clamp between 0 and 100
+        updateScrollEffect(progress, detachedSquare, dynamicText);
 
-                updateScrollEffect(progress);
-
-                // Gradually show the dynamic text during detachment
-                const textOpacity = Math.min((progress / 50), 1); // Start appearing at 0% and fully visible at 50% progress
-                dynamicText.style.opacity = textOpacity.toString();
-
-                // Check if detachment is complete
-                if (progress >= 100) {
-                    isDetachmentComplete = true;
-                    showTimelineLine(); // Make the line appear
-                    showNextYear(); // Show 2014
-                }
-
-                // Prevent default scrolling
-                event.preventDefault();
-            } else if (direction === "down") {
-                // Move to next page only after some delay to allow users to see "2014"
-                setTimeout(() => {
-                    isOnNextPage = true;
-                    scrollSection.style.transform = "translateY(-100vh)";
-                    nextPage.style.display = "flex";
-                    nextPage.style.opacity = 1;
-                }, 2000); // 2-second delay before moving to next page
-                event.preventDefault();
-            }
-        } else if (isOnNextPage && direction === "up") {
-            // Handle reverse scrolling back to the first page
-            isOnNextPage = false;
-
-            scrollSection.style.transform = "translateY(0)";
-            nextPage.style.opacity = 0;
-
-            setTimeout(() => {
-                nextPage.style.display = "none";
-            }, 1000);
-
-            // Reverse detachment process
-            reverseDetachment();
-
-            // Prevent default scrolling during transition
-            event.preventDefault();
+        if (progress >= 100 && !isDetachmentComplete) {
+            isDetachmentComplete = true;
+            showTimelineLine(progressBar, nextYear, currentYear);
+            showNextYear(nextYear);
+        } else if (progress < 100) {
+            isDetachmentComplete = false;
+            resetTimelineLine(progressBar, nextYear, currentYear);
         }
     });
+}
 
-    function updateScrollEffect(progress) {
-        // Move detached square to the right by up to 30px
-        const moveRight = (progress / 100) * 30; // Calculate the movement based on progress
-        detachedSquare.style.transform = `translateX(${moveRight}px)`;
+function updateScrollEffect(progress, detachedSquare, dynamicText) {
+    const moveRight = (progress / 100) * 30;
 
-        // Adjust opacity during detachment
-        const opacity = progress >= 50 ? 0.5 : 1;
-        detachedSquare.style.opacity = `${opacity}`;
+    // Move detached square
+    if (detachedSquare) detachedSquare.style.transform = `translateX(${moveRight}px)`;
+
+    // Adjust opacity for the detached square
+    const opacity = progress >= 50 ? 0.5 : 1;
+    if (detachedSquare) detachedSquare.style.opacity = `${opacity}`;
+
+    // Make dynamic text visible only after scrolling starts
+    if (dynamicText) {
+        const textOpacity = Math.min(progress / 50, 1); // Fade in from 0% to 50% scroll progress
+        dynamicText.style.opacity = textOpacity.toString();
+    }
+}
+
+function showTimelineLine(progressBar, nextYear, currentYear) {
+    const timelineContainer = document.querySelector(".timeline-container");
+    if (!timelineContainer || !progressBar || !nextYear || !currentYear) return;
+
+    const timelineTop = timelineContainer.getBoundingClientRect().top;
+    const nextYearTop = nextYear.getBoundingClientRect().top;
+    const stopHeight = nextYearTop - timelineTop - 140;
+
+    progressBar.style.height = `${stopHeight}px`;
+    progressBar.style.backgroundColor = "black";
+
+    setTimeout(() => {
+        nextYear.classList.add("enlarged");
+        currentYear.classList.add("transparent");
+    }, 600);
+}
+
+function resetTimelineLine(progressBar, nextYear, currentYear) {
+    if (progressBar) {
+        progressBar.style.height = "0px"; // Reset the timeline line height
+        progressBar.style.backgroundColor = "transparent"; // Hide the line
     }
 
-    function showTimelineLine() {
-        // Adjust the timeline height dynamically to stop above 2014
-        progressBar.style.height = "calc(100% - 80px)"; // Stop above 2014
-        progressBar.style.backgroundColor = "black"; // Ensure it's visible
-    
-        // Trigger the continuation line
-        progressBar.classList.add("continuation");
+    if (nextYear) {
+        nextYear.classList.remove("enlarged");
+        nextYear.style.opacity = "0";
+        nextYear.style.transform = "translateY(20px)";
     }
-    
 
-    function showNextYear() {
+    if (currentYear) {
+        currentYear.classList.remove("transparent");
+    }
+}
+
+function showNextYear(nextYear) {
+    if (nextYear) {
         nextYear.style.opacity = "1";
         nextYear.style.transform = "translateY(0)";
-        nextYear.style.color = "red"; // Highlight 2014
-    
-        // Add the continuation class to the line
-        progressBar.classList.add("continuation");
+        nextYear.style.color = "red";
     }
-    
-    
-    
-    function moveToNextPage() {
-        setTimeout(() => {
-            isOnNextPage = true;
-    
-            // Transition the scroll section out of view
-            scrollSection.style.transform = "translateY(-100vh)";
-            nextPage.style.display = "flex";
-            nextPage.style.opacity = 1;
-    
-            // Set 2014 as the current year on the new page
-            nextYear.style.bottom = "0px"; // Align to the bottom
-            nextYear.style.color = "black"; // Make it neutral
-            nextYear.textContent = "2014"; // Keep the year as current
-        }, 2000); // 2-second delay before moving to the next page
-    }
-    
+}
 
-    function reverseDetachment() {
-        const resetInterval = setInterval(() => {
-            progress -= 5;
-            if (progress <= 0) {
-                progress = 0;
-                isDetachmentComplete = false;
-                clearInterval(resetInterval);
-            }
-            updateScrollEffect(progress);
-    
-            // Reset the line and 2014 visibility
-            progressBar.classList.remove("continuation");
-            nextYear.style.opacity = "0";
-            nextYear.style.transform = "translateY(10px)";
-        }, 50);
-    }
-    
-    
-    
-    
-});
+// Run immediately after script loads
+initializeScrollLogic();

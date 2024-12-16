@@ -3,7 +3,7 @@ body {
     font-family: 'Arial', sans-serif;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background-color: rgb(0, 0, 48);
+
 }
 
 section {
@@ -13,4 +13,25 @@ section {
     align-items: center;
     text-align: center;
     color: #fff;
+}
+
+
+
+
+.intro-page {
+    /* background-color: rgba(100, 99, 99, 0.235); */
+    
+}
+
+.divider {
+    width: 260px;           /* Adjust width as needed */
+    height: 2px;           /* Thickness of the line */
+    margin: 30px auto;     /* Centers the divider horizontally */
+    border-radius: 5px;    /* Slightly rounded corners */
+
+    /* Subtle gradient: Blue to Yellow */
+    background: linear-gradient(to right, #0057b8, #ffd700);
+
+    /* Optional subtle shadow for depth */
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
 }

@@ -1,18 +1,35 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     const timelineItems = document.querySelectorAll('.timeline-item');
+document.addEventListener("DOMContentLoaded", () => {
+    const monthsContainer = document.getElementById('monthsContainer');
+    const months = Array.from(monthsContainer.querySelectorAll('div'));
+    const centerText = document.getElementById('centerText');
 
-//     // Handle click events on timeline items
-//     timelineItems.forEach(item => {
-//         item.addEventListener('click', () => {
-//             // Remove the active class from all items
-//             timelineItems.forEach(i => i.classList.remove('active'));
+    // boxHeight + spacing
+    const boxHeight = 200;
+    const boxSpacing = 100;
+    const totalHeightPerMonth = boxHeight + boxSpacing;
 
-//             // Add the active class to the clicked item
-//             item.classList.add('active');
+    // When user scrolls, we find the current month
+    // monthIndex = floor(scrollY / totalHeightPerMonth)
 
-//             // Get the year from the clicked item (optional functionality)
-//             const year = item.id.replace('timeline-', '');
-//             alert(`You selected the year: ${year}`); // Replace with actual functionality
-//         });
-//     });
-// });
+    const monthData = [
+      
+    ];
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        let monthIndex = Math.floor(scrollY / totalHeightPerMonth);
+        if (monthIndex < 0) monthIndex = 0;
+        if (monthIndex > months.length - 1) monthIndex = months.length - 1;
+
+        highlightMonth(monthIndex);
+        centerText.textContent = monthData[monthIndex];
+    });
+
+    function highlightMonth(index) {
+        months.forEach(m => m.classList.remove('highlighted'));
+        months[index].classList.add('highlighted');
+    }
+
+    // Initially highlight the first month
+    highlightMonth(0);
+});
